@@ -50,6 +50,7 @@ namespace TicTacToe.Client
             Console.Clear();
             Console.WriteLine(g._board.ToString());
 
+            //Print out winner
             Console.WriteLine("GAME IS FINISHED - WINNER IS: ");
             Console.WriteLine(g._winner.Name);
             Console.ReadLine();
