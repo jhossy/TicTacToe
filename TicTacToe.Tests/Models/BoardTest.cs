@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TicTacToe.Library.Models;
+using System.Collections.Generic;
 
 namespace TicTacToe.Tests.Models
 {
@@ -62,6 +63,24 @@ namespace TicTacToe.Tests.Models
         }
 
         [TestMethod]
+        public void IsTileOccupiedShouldReturnTrue()
+        {
+            //Arrange
+            Board b = new Board();
+
+            int x = 4;
+            int y = 4;
+            string marker = "Z";
+
+            //Act
+            Assert.IsTrue(b.IsTileOccupied(x, y));
+            b.PlaceMarker(x, y, marker);
+
+            //Assert
+            Assert.IsTrue(b.IsTileOccupied(x, y));
+        }
+
+        [TestMethod]
         public void PlaceMarkerShouldReturnTrue()
         {
             //Arrange
@@ -97,5 +116,78 @@ namespace TicTacToe.Tests.Models
             Assert.IsFalse(markerPlaced);
             Assert.Fail(b._board[x, y]);
         }
+
+        [TestMethod]
+        public void HasThreeInARowVerticallyShouldReturnTrue()
+        {
+            //Arrange
+            Board b = new Board();
+
+            List<Tuple<int, int>> coords = new List<Tuple<int, int>>();
+            coords.Add(new Tuple<int, int>(0, 0));
+            coords.Add(new Tuple<int, int>(0, 1));
+            coords.Add(new Tuple<int, int>(0, 2));
+
+            string marker = "Z";
+            string winnerMarker;
+
+            //Act
+            foreach (Tuple<int, int> t in coords)
+            {
+                b.PlaceMarker(t.Item1, t.Item2, marker);
+            }
+            
+            //Assert
+            Assert.IsTrue(b.HasThreeInARow(out winnerMarker));
+        }
+
+        [TestMethod]
+        public void HasThreeInARowHorizontallyShouldReturnTrue()
+        {
+            //Arrange
+            Board b = new Board();
+
+            List<Tuple<int, int>> coords = new List<Tuple<int, int>>();
+            coords.Add(new Tuple<int, int>(0, 0));
+            coords.Add(new Tuple<int, int>(1, 0));
+            coords.Add(new Tuple<int, int>(2, 0));
+
+            string marker = "Z";
+            string winnerMarker;
+
+            //Act
+            foreach (Tuple<int, int> t in coords)
+            {
+                b.PlaceMarker(t.Item1, t.Item2, marker);
+            }
+
+            //Assert
+            Assert.IsTrue(b.HasThreeInARow(out winnerMarker));
+        }
+
+        [TestMethod]
+        public void HasThreeInARowDiagonallyShouldReturnTrue()
+        {
+            //Arrange
+            Board b = new Board();
+
+            List<Tuple<int, int>> coords = new List<Tuple<int, int>>();
+            coords.Add(new Tuple<int, int>(0, 0));
+            coords.Add(new Tuple<int, int>(1, 1));
+            coords.Add(new Tuple<int, int>(2, 2));
+
+            string marker = "Z";
+            string winnerMarker;
+
+            //Act
+            foreach (Tuple<int, int> t in coords)
+            {
+                b.PlaceMarker(t.Item1, t.Item2, marker);
+            }
+
+            //Assert
+            Assert.IsTrue(b.HasThreeInARow(out winnerMarker));
+        }
+
     }
 }

@@ -10,12 +10,12 @@ namespace TicTacToe.Library.Models
     {
         public string Name;
 
-        public string[] Markers;
+        public string Marker;
 
         public Player(string name, string marker)
         {
             Name = name;
-            Markers = new string[3] { marker, marker, marker };
+            Marker = marker;
         }
     }
 }
